@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Book Donation Form</title>
+</head>
+
+<body>
+
+    <h1>Book Donation Form</h1>
+    <p>Fill in the form below to donate book!</p>
+    <hr>
+
+    <form>
+
+        <fieldset>
+            <legend>Personal Details</legend>
+
+            <label>Your Name</label><br>
+            <input type="text" id="name" placeholder="Enter your full name"><br><br>
+
+            <label>Your ID</label><br>
+            <input type="password" id="pid" placeholder="Your  ID"><br><br>
+
+            <label>Date of Birth</label><br>
+            <input type="date" id="dob"><br>
+
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Book Details</legend>
+
+            <label>Book Category</label><br>
+            <select id="book">
+                <option value="">-- Select a category --</option>
+                <option value="fiction">Fiction</option>
+                <option value="science">Science</option>
+                <option value="history">History</option>
+                <option value="education">Education</option>
+            </select><br><br>
+
+            <label>Book Condition</label><br>
+            <input type="radio" name="reason" value="new"> New<br>
+            <input type="radio" name="reason" value="used"> Used<br>
+            <input type="radio" name="reason" value="good"> Good<br>
+            <br><br>
+
+            <label>Any notes for the book?</label><br>
+            <textarea id="notes" rows="3" cols="35"
+                placeholder="e.g. I want to donate book to help others too to read."></textarea><br>
+
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Drop off Day</legend>
+
+            <input type="checkbox" value="mon"> Monday<br>
+            <input type="checkbox" value="wed"> Wednesday<br>
+            <input type="checkbox" value="fri"> Friday<br>
+
+        </fieldset>
+
+        <br>
+        <input type="submit" value="Donate My Book">
+
+    </form>
+
+</body>
+
+</html>

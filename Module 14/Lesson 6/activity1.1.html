@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Form Validation</title>
+</head>
+
+<body>
+    
+<form id="advanced-form" novalidate>
+    <!-- 'novalidate' disables the browser's default ugly popup bubbles -->
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required minlength="4">
+        <span class="error-hook" id="username-err"></span>
+    </div>
+
+    <div>
+        <label for="zipcode">Zip Code (5 Digits):</label>
+        <input type="text" id="zipcode" name="zipcode" required pattern="[0-9]{5}">
+        <span class="error-hook" id="zipcode-err"></span>
+    </div>
+
+    <button type="submit">Submit Data</button>
+</form>
+</body>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odd/Even Click Randomizer</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e1b4b, #311042);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 320px;
+        }
+
+        #number-display {
+            font-size: 5rem;
+            font-weight: 800;
+            margin: 20px 0;
+            color: #a855f7;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        /* Status classes managed by JavaScript */
+        .rolling {
+            color: #22c55e !important;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.6) !important;
+        }
+
+        .stopped {
+            color: #ef4444 !important;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.6) !important;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            background: #a855f7;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4);
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #9333ea;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .stats-panel {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .badge {
+            font-weight: bold;
+            color: #f472b6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="status-text">🔄 Running...</div>
+        <div id="number-display" class="rolling">0</div>
+        <button id="action-btn">Click Me</button>
+
+        <div class="stats-panel">
+            <div>Total Clicks: <span id="click-count" class="badge">0</span></div>
+            <div>Next Click: <span id="click-type" class="badge">1st (Odd)</span></div>
+        </div>
+    </div>
+
+    <script>
+        // 1. App State Variables
+        let clickCount = 0;
+        let intervalId = null;
+
+        // 2. Select DOM Elements
+        const numberDisplay = document.getElementById('number-display');
+        const actionBtn = document.getElementById('action-btn');
+        const statusText = document.getElementById('status-text');
+        const clickCountLabel = document.getElementById('click-count');
+        const clickTypeLabel = document.getElementById('click-type');
+
+        // 3. Function to update layout text with a random integer (1 to 100)
+        function generateRandomNumber() {
+            numberDisplay.textContent = Math.floor(Math.random() * 100) + 1;
+        }
+
+        // 4. Start the automatic continuous background change cycle
+        function startChanging() {
+            if (!intervalId) {
+                intervalId = setInterval(generateRandomNumber, 50);
+                statusText.textContent = "🔄 Running...";
+                numberDisplay.className = "rolling";
+            }
+        }
+
+        // 5. Terminate the active change timer loop
+        function stopChanging() {
+            clearInterval(intervalId);
+            intervalId = null;
+            statusText.textContent = "🛑 Stopped!";
+            numberDisplay.className = "stopped";
+        }
+
+        // 6. Handle interactions and execute odd/even evaluation rules
+        actionBtn.addEventListener('click', function () {
+            clickCount++;
+            clickCountLabel.textContent = clickCount;
+
+            // Determine if the click count is an odd or even integer 
+            if (clickCount % 2 !== 0) {
+                // Odd-numbered click (1st, 3rd, 5th...): HALT structural updates
+                stopChanging();
+                clickTypeLabel.textContent = `${clickCount + 1}th (Even)`;
+            } else {
+                // Even-numbered click (2nd, 4th, 6th...): RESUME loop updates
+                startChanging();
+                clickTypeLabel.textContent = `${clickCount + 1}th (Odd)`;
+            }
+        });
+
+        // Initialize the app loop immediately upon interface display initialization
+        startChanging();
+    </script>
+</body>
+
+</html>

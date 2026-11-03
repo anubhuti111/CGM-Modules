@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stop Watch</title>
+</head>
+
+<body>
+    <h2>Stop Watch</h2>
+    <div class="wrapper">
+        <h1>Stopwatch</h1>
+        <p><span id="seconds">00</span>:<span id="milliseconds">00</span></p>
+        <button id="button-start">Start</button>
+        <button id="button-stop">Stop</button>
+        <button id="button-reset">Reset</button>
+    </div>
+
+    <script>
+        window.onload = function () {
+                // All variables are defined here
+                var seconds = 0;
+                var milliseconds = 0;
+                var appendMilliseconds = document.getElementById("milliseconds");
+                var appendSeconds = document.getElementById("seconds");
+                var buttonStart = document.getElementById("button-start");
+                var buttonStop = document.getElementById("button-stop");
+                var buttonReset = document.getElementById("button-reset");
+                var Interval;
+
+                buttonStart.onclick = function () {
+                    clearInterval(Interval);
+                    Interval = setInterval(startTimer, 10);
+                }
+
+                buttonStop.onclick = function () {
+                    clearInterval(Interval);
+                }
+
+                buttonReset.onclick = function () {
+                    clearInterval(Interval);
+                    milliseconds = 0;
+                    seconds = 0;
+                    appendMilliseconds.innerHTML = "00";
+                    appendSeconds.innerHTML = "00";
+                }
+
+                // Moving this function INSIDE window.onload fixes the variable visibility bug!
+                function startTimer() {
+                    milliseconds++;
+
+                    if (milliseconds <= 9) {
+                        appendMilliseconds.innerHTML = "0" + milliseconds;
+                    }
+                    if (milliseconds > 9) {
+                        appendMilliseconds.innerHTML = milliseconds;
+                    }
+                    if (milliseconds > 99) {
+                        seconds++;
+                        // Pad seconds with a leading zero if it's less than 10
+                        appendSeconds.innerHTML = seconds <= 9 ? "0" + seconds : seconds;
+                        milliseconds = 0;
+                        appendMilliseconds.innerHTML = "00";
+                    }
+                }
+            }
+    </script>
+</body>
+
+</html>

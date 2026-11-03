@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color Changer</title>
+    <style>
+        /* CSS: Centers the button and sets up smooth transitions */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease;
+            /* Smoothly changes the color */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        button:hover {
+            background-color: #eee;
+        }
+
+        button:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+        }
+
+        #colorText {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HTML Elements -->
+    <button id="colorBtn">Change Color</button>
+    <div id="colorText">Current Color: #f0f0f0</div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Select the DOM elements
+        const button = document.getElementById('colorBtn');
+        const colorText = document.getElementById('colorText');
+
+        // 2. Function to generate a random hex color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // 3. Add event listener to the button
+        button.addEventListener('click', function () {
+            const newColor = getRandomColor();
+
+            // Apply the new color to the body's background
+            document.body.style.backgroundColor = newColor;
+
+            // Display the current hex code on screen
+            colorText.textContent = `Current Color: ${newColor}`;
+        });
+    </script>
+</body>
+
+</html>

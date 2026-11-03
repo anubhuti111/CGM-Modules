@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Counter</title>
+</head>
+
+<body>
+    <h2>Counter</h2>
+    
+        <div id="counter-value">0</div>
+    
+        <div class="button-group">
+            <button class="btn-decrease" id="decreaseBtn">Decrease</button>
+            <button class="btn-reset" id="resetBtn">Reset</button>
+            <button class="btn-increase" id="increaseBtn">Increase</button>
+        </div>
+    
+
+
+    <script>
+        let count = 0;
+
+            // 2. Select DOM interface elements
+            const valueDisplay = document.getElementById('counter-value');
+            const decreaseBtn = document.getElementById('decreaseBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const increaseBtn = document.getElementById('increaseBtn');
+
+            // 3. Central function to safely update the UI text and styling
+            function updateDisplay() {
+                valueDisplay.textContent = count;
+
+                // Optional structural styling rules based on the integer state
+                if (count > 0) {
+                    valueDisplay.className = 'positive';
+                } else if (count < 0) {
+                    valueDisplay.className = 'negative';
+                } else {
+                    valueDisplay.className = '';
+                }
+            }
+
+            // 4. Attach system click event listeners using addEventListener()
+            increaseBtn.addEventListener('click', function () {
+                count++;
+                updateDisplay();
+            });
+
+            decreaseBtn.addEventListener('click', function () {
+                count--;
+                updateDisplay();
+            });
+
+            resetBtn.addEventListener('click', function () {
+                count = 0;
+                updateDisplay();
+            });
+        
+    </script>
+</body>
+
+</html>
